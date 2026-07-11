@@ -89,7 +89,7 @@ reports/{公司名}/
 - 本地克隆路径：`~/ai-berkshire/`
 - 远程仓库：`https://github.com/xbtlin/ai-berkshire.git`
 - 推送前先 `git pull --rebase origin main`（远程经常有新提交）
-- commit message 用中文，描述清楚改了什么
+- commit message 用**英文**，描述清楚改了什么（英文动词开头，如 `Add ...` / `Update ...` / `Fix ...`）
 - 不要推送中间过程文件（如 data_collection.md），只推最终报告
 
 ## 常用命令
@@ -98,7 +98,7 @@ reports/{公司名}/
 # 推送报告到GitHub
 cd ~/ai-berkshire
 git add reports/xxx.md
-git commit -m "添加xxx报告"
+git commit -m "Add xxx report"
 git pull --rebase origin main
 git push origin main
 ```
