@@ -143,6 +143,12 @@
 2. 通过 SendMessage 把完整分析报告发送给 team-lead（type: "message", recipient: "team-lead"）
 ```
 
+### 第四步半：模型分配（若使用 Workflow 工具以 agent() 方式执行）
+
+- **4 个大师 agent**（business-analyst / financial-analyst / industry-researcher / risk-assessor）：不传 `model` 参数，沿用会话默认模型（当前为 Sonnet 5），兼顾速度与成本。
+- **反驳/phản biện agent（critic）**：显式设置 `opts.model: 'opus'` — 该步骤需仲裁4份报告间的数据冲突、识别"正确但无用"的共识论点，Opus 判断力更强，值得多花的成本。
+- team-lead 最终汇总报告由主对话（会话默认模型）完成，无需额外设置。
+
 ### 第五步：接收报告并跟踪进度
 
 - 向用户实时展示进度表（哪些Agent已完成、哪些仍在研究中）
@@ -227,3 +233,4 @@ python3 tools/report_audit.py verdict \
 6. **耐心等待**——4个Agent研究需要几分钟，实时向用户更新进度
 7. **反偏见意识**——team-lead在汇总时必须评估：各Agent的分析是否受限于资料充裕度？是否与市场共识过度趋同？最终报告需包含"信息丰富度评级"和"AI研究局限性声明"
 8. **信息稀缺时的诚实原则**——宁可在报告中留白标注"数据不足"，也不要用推测填满框架伪装确定性
+9. **模型分级**——用 Workflow 工具执行时，4个大师 agent 用会话默认模型（Sonnet），critic/phản biện agent 单独设 `opts.model: 'opus'`（见第四步半），既保证仲裁质量又控制成本
